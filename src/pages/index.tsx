@@ -1,10 +1,37 @@
-import Head from 'next/head'
-import styles from '../styles/home.module.css'
-import Image from 'next/image'
+import Head from 'next/head';
+import Image from 'next/image';
 
-import heroImg from '../../public/assets/hero.png'
 
-export default function Home() {
+import styles from '../styles/home.module.css';
+import heroImg from '../../public/assets/hero.png';
+import TableOne from './TablesComponents/TableOne';
+import TableTwo from './TablesComponents/TableTwo';
+import { useState } from 'react';
+
+
+const ChartComponent: React.FC = () => {
+  const [controler, setControler] = useState(0);
+
+  const remove = () => {
+    setControler(controler - 1);
+  };
+
+  const adição = () => {
+    setControler(controler + 1);
+  };
+
+  function mudarTabela() {
+    if (controler === 0) {
+      return <TableOne />;
+    } else if (controler === 1) {
+      return <TableTwo />;
+    } 
+  }
+
+
+  console.log('1', remove)
+  console.log('1', adição)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -15,27 +42,32 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.logoContent}>
-          <Image 
-          className={styles.hero}
-          alt='Logo de tarefas'
-          src={heroImg}
-          priority
+          <Image
+            className={styles.hero}
+            alt="Logo de tarefas"
+            src={heroImg}
+            priority
           />
         </div>
         <h1 className={styles.title}>
-          Sitema feito para você organizar <br />
-          seus estudos e tarefas
+        Teste gráfico
         </h1>
 
         <div className={styles.infContent}>
-          <section className={styles.box}>
-            <span>+12 posts</span>
+          <section style={{ display: controler === 1 ? 'block' : 'none' }} onClick={remove} className={styles.box}>
+            <span>Before</span>
           </section>
-          <section className={styles.box}>
-            <span>+12 posts</span>
+          <section  style={{ display: controler === 0 ? 'block' : 'none' }} onClick={adição} className={styles.box}>
+            <span>Next</span>
           </section>
+        </div>
+
+        <div>
+        {mudarTabela()}
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
+
+export default ChartComponent;
