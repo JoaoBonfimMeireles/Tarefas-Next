@@ -9,9 +9,6 @@ const TableTwo: React.FC = () => {
   const [firstDatasetLabel, setFirstDatasetLabel] = useState<string>('');
   const [secondDatasetLabel, setSecondDatasetLabel] = useState<string>('');
   const [thirdDatasetLabel, setThirdDatasetLabel] = useState<string>('');
-
-  const [sum, setSum] = useState<number>(0);
-
   
   useEffect(() => {
     if (canvasRef.current) {
@@ -58,20 +55,6 @@ const TableTwo: React.FC = () => {
         setFirstDatasetLabel(chartRef.current?.data.datasets[0].label || '');
         setSecondDatasetLabel(chartRef.current?.data.datasets[1].label || '');
         setThirdDatasetLabel(chartRef.current?.data.datasets[2].label || '');
-
-        const dataset = chartRef.current?.data.datasets[0].data || [];
-        const sum = dataset.reduce((accumulator, currentValue) => {
-          if (typeof accumulator === 'number') {
-            if (typeof currentValue === 'number') {
-              return accumulator + currentValue;
-            } else {
-              return accumulator;
-            }
-          } else {
-            return typeof currentValue === 'number' ? currentValue : 0;
-          }
-        }, 0);
-
       }
     }
 
