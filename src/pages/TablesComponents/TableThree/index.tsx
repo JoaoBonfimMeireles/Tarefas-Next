@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chart from 'chart.js/auto';
 import styles from '../../../styles/home.module.css';
 
-const TableTwo: React.FC = () => {
+const TableThree: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart | null>(null);
 
@@ -20,7 +20,7 @@ const TableTwo: React.FC = () => {
         }
 
         chartRef.current = new Chart(ctx, {
-          type: 'line',
+          type: 'scatter',
           data: {
             labels: [
               '2024-02-02', '2024-02-03', 'Jan/23', 'Fev/23', 'Mar/23',
@@ -58,8 +58,6 @@ const TableTwo: React.FC = () => {
       }
     }
 
-
-
     return () => {
       if (chartRef.current) {
         chartRef.current.destroy();
@@ -68,14 +66,11 @@ const TableTwo: React.FC = () => {
 
   }, []);
 
-
-
-
   return (
     <>
       <div className={styles.containerTablesTitle}>
         <div>
-          <p>Clientes {firstDatasetLabel} e o val</p>
+          <p>Clientes {firstDatasetLabel}</p>
         </div>
         <div>
           <p>Clientes {secondDatasetLabel}</p>
@@ -91,4 +86,4 @@ const TableTwo: React.FC = () => {
   );
 };
 
-export default TableTwo;
+export default TableThree;

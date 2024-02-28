@@ -1,12 +1,12 @@
 import Head from 'next/head';
-import Image from 'next/image';
 
 
 import styles from '../styles/home.module.css';
-import heroImg from '../../public/assets/hero.png';
 import TableOne from './TablesComponents/TableOne';
 import TableTwo from './TablesComponents/TableTwo';
 import { useState } from 'react';
+import TableThree from './TablesComponents/TableThree';
+import { Textarea } from '@/components/textarea';
 
 
 const ChartComponent: React.FC = () => {
@@ -25,7 +25,8 @@ const ChartComponent: React.FC = () => {
       return <TableOne />;
     } else if (controler === 1) {
       return <TableTwo />;
-    } 
+    } else if (controler === 2){ 
+      return <TableThree />}
   }
 
 
@@ -41,29 +42,23 @@ const ChartComponent: React.FC = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <div className={styles.logoContent}>
-          <Image
-            className={styles.hero}
-            alt="Logo de tarefas"
-            src={heroImg}
-            priority
-          />
-        </div>
         <h1 className={styles.title}>
         Teste gráfico
         </h1>
 
         <div className={styles.infContent}>
-          <section style={{ display: controler === 1 ? 'block' : 'none' }} onClick={remove} className={styles.box}>
+          <section style={{ display: (controler >= 1 && controler <= 2) ? 'block' : 'none' }} onClick={remove} className={styles.box}>
             <span>Before</span>
           </section>
-          <section  style={{ display: controler === 0 ? 'block' : 'none' }} onClick={adição} className={styles.box}>
+          <section  style={{ display: (controler >= 0 && controler <= 1) ? 'block' : 'none' }} onClick={adição} className={styles.box}>
             <span>Next</span>
           </section>
         </div>
 
-        <div>
+        <div className={styles.containerTables}>
         {mudarTabela()}
+        <Textarea 
+        placeholder="Digite suas observações..." />
         </div>
       </main>
     </div>
